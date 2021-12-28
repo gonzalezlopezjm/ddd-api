@@ -1,0 +1,29 @@
+doctrine:
+    dbal:
+        dbname: '%env(DATABASE_DBNAME)%'
+        host: '%env(DATABASE_HOST)%'
+        port: '%env(DATABASE_PORT)%'
+        user: '%env(DATABASE_USER)%'
+        password: '%env(DATABASE_PASSWORD)%'
+        driver: '%env(DATABASE_DRIVER)%'
+        types:
+            event_log_uuid: Cal\EventLogger\Infrastructure\Persistence\Doctrine\ValueObjectEventLogUuidType
+            ride_service_uuid: Cal\RideServices\Infrastructure\Persistence\Doctrine\ValueObjectRideServiceUuidType
+
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            RideService:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/RideServices/Infrastructure/Persistence/Doctrine'
+                prefix: 'Cal\RideServices\Domain'
+                alias: Cal\RideServices\Domain
+            EventLogger:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/EventLogger/Infrastructure/Persistence/Doctrine'
+                prefix: 'Cal\EventLogger\Domain'
+                alias: Cal\EventLogger\Domain

@@ -1,0 +1,16 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\Tests\Shared\Infrastructure\Behat\:
+        resource: '../tests/Shared/Infrastructure/Behat/*'
+
+    App\Tests\Shared\:
+        resource: '../tests/Shared'
+
+    App\Tests\Shared\Infrastructure\Doctrine\DatabaseArranger:
+        public: true
+
+    App\Tests\Shared\Infrastructure\Doctrine\DatabaseCleaner: '@App\Tests\Shared\Infrastructure\Doctrine\MySqlDatabaseCleaner'
+    App\Tests\Shared\Infrastructure\Doctrine\DatabaseArrangerInterface: '@App\Tests\Shared\Infrastructure\Doctrine\DatabaseArranger'

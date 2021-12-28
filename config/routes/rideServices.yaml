@@ -1,0 +1,21 @@
+rideServicesCreation:
+    path: /rideServices
+    controller: App\Controller\RideServices\RideServicesPostController
+    methods: POST
+
+rideServicesUpdate:
+    path: /rideServices/{uuid}
+    controller: App\Controller\RideServices\RideServicesPutController
+    methods: [PATCH, PUT]
+
+rideServicesDetail:
+    path: /rideServices/{uuid}
+    controller: App\Controller\RideServices\RideServicesDetailGetController
+    methods: GET
+
+rideServicesList:
+    path: /rideServices
+    controller: App\Controller\RideServices\RideServicesGetController
+    methods: GET
+
+

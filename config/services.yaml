@@ -1,0 +1,67 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # Services definition
+    # -------------------
+    App\:
+        resource: '../app/'
+        exclude:
+            - '../app/DependencyInjection/'
+            - '../app/Entity/'
+            - '../app/Kernel.php'
+            - '../app/Tests/'
+
+    Cal\:
+        resource: '../src/'
+        exclude:
+            - '../src/Shared/Domain/helpers.php'
+
+    App\Controller\:
+        resource: '../app/Controller/'
+        tags: [ 'controller.service_arguments' ]
+
+    # Middleware
+    # ----------
+    Cal\Shared\Infrastructure\Symfony\AddJsonBodyToRequestListener:
+        tags:
+          - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    # Tag instances
+    # -------------
+    _instanceof:
+        Cal\Shared\Domain\Bus\Command\CommandHandler:
+            tags: ['cal.command_handler']
+
+        Cal\Shared\Domain\Bus\Query\QueryHandler:
+            tags: ['cal.query_handler']
+
+        Cal\Shared\Domain\Bus\Event\EventSubscriber:
+            tags: [ 'cal.event_subscriber' ]
+
+    # Configure params
+    # ----------------
+    Cal\Shared\Infrastructure\Bus\Command\InMemorySymfonyCommandBus:
+        arguments: [!tagged cal.command_handler]
+
+    Cal\Shared\Infrastructure\Bus\Query\InMemorySymfonyQueryBus:
+        arguments: [!tagged cal.query_handler]
+
+    Cal\Shared\Infrastructure\Bus\Event\InMemorySymfonyEventBus:
+        arguments: [ !tagged cal.event_subscriber ]
+
+    Cal\Shared\Infrastructure\Bus\Event\MySqlDoctrineEventConsumer:
+        arguments: [ !tagged cal.event_subscriber ]
+
+    Cal\Shared\Domain\Bus\Event\EventMapping:
+        arguments:
+            $mapping:
+                - Cal\RideServices\Domain\Event\RideServiceCreatedEvent
+                - Cal\RideServices\Domain\Event\RideServiceUpdatedEvent
+
+    # Interfaces definitions
+    # ----------------------
+    Cal\Shared\Domain\Bus\Event\EventBus: '@Cal\Shared\Infrastructure\Bus\Event\MySqlDoctrineEventBus'

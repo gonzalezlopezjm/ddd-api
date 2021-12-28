@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "f62f0caa-8360-4cbd-b382-5c2cbd651aaa",
+		"name": "DDD - Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create ride service",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pickUp\": {\r\n        \"name\": \"Home2 Suites by Hilton Los Angeles Montebello\",\r\n        \"latitude\": 34.029933529548074, \r\n        \"longitude\": -118.12978420564565\r\n    },\r\n    \"dropOff\": {\r\n        \"name\": \"Tamales Lilianas\",\r\n        \"latitude\": 34.04101745305486, \r\n        \"longitude\": -118.16548208378467\r\n    },\r\n    \"vehicleType\": \"van\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/rideServices",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"rideServices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search ride services",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/rideServices",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"rideServices"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "offset",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "orderBy",
+							"value": "serviceLocator",
+							"disabled": true
+						},
+						{
+							"key": "order",
+							"value": "asc",
+							"disabled": true
+						},
+						{
+							"key": "vehicleType",
+							"value": "suv",
+							"disabled": true
+						},
+						{
+							"key": "pickUp",
+							"value": "angeles",
+							"disabled": true
+						},
+						{
+							"key": "dropOff",
+							"value": "museum",
+							"disabled": true
+						},
+						{
+							"key": "serviceLocator",
+							"value": "C91YQALO",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update ride service",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"uuid\": \"bab70862-dcfe-47e1-aa80-ddcdb91f0f66\",\r\n    \"pickUp\": {\r\n        \"name\": \"Universal Studios Hollywood\",\r\n        \"latitude\": 34.1370245510983,\r\n        \"longitude\": -118.35278348414\r\n    },\r\n    \"dropOff\": {\r\n        \"name\": \"Old Los Angeles Zoo\",\r\n        \"latitude\": 34.133832514171,\r\n        \"longitude\": -118.28887329413\r\n    },\r\n    \"vehicleType\": \"van\",\r\n    \"serviceLocator\": \"0TVBOS95\",\r\n    \"createdAt\": \"2021-12-28T11:09:36+00:00\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8000/rideServices/bab70862-dcfe-47e1-aa80-ddcdb91f0f66",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"rideServices",
+						"bab70862-dcfe-47e1-aa80-ddcdb91f0f66"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ride service detail",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/rideServices/bab70862-dcfe-47e1-aa80-ddcdb91f0f66",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"rideServices",
+						"bab70862-dcfe-47e1-aa80-ddcdb91f0f66"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
